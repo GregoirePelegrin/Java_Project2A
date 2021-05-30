@@ -5,49 +5,59 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Neuron {
+    private static int count = 0;
+
+    public int id;
     public Float bias;
     public Float value;
     public ArrayList<Float> weights;
 
     public Neuron(){
-        this.bias = Float.valueOf(new Random().nextFloat() * 2 - 1);
-        this.value = Float.valueOf(0);
+        this.id = Neuron.count++;
+
+        this.bias = new Random().nextFloat() * 2 - 1;
+        this.value = (float) 0;
         this.weights = new ArrayList<>();
     }
-    public Neuron(ArrayList<Float> w){
-        this.bias = Float.valueOf(new Random().nextFloat() * 2 - 1);
-        this.value = Float.valueOf(0);
+    public Neuron(ArrayList<Float> _weights){
+        this.id = Neuron.count++;
+
+        this.bias = new Random().nextFloat() * 2 - 1;
+        this.value = (float) 0;
         this.weights = new ArrayList<>();
-        for(float f : w) this.weights.add(Float.valueOf(f));
+        this.weights.addAll(_weights);
     }
-    public Neuron(Neuron n){
-        this.bias = n.bias;
-        this.value = n.value;
+    public Neuron(Neuron _neuron){
+        this.id = Neuron.count++;
+
+        this.bias = _neuron.bias;
+        this.value = _neuron.value;
         this.weights = new ArrayList<>();
-        for(float f : n.weights) this.weights.add(Float.valueOf(f));
+        this.weights.addAll(_neuron.weights);
     }
 
-    public void evaluate(ArrayList<Float> inputs){
+    public void evaluate(ArrayList<Float> _inputs){
         Float result = this.bias;
-        Iterator<Float> inputIterator = inputs.iterator();
+        Iterator<Float> inputIterator = _inputs.iterator();
         Iterator<Float> weightIterator = this.weights.iterator();
-        while(inputIterator.hasNext() && weightIterator.hasNext()) result += inputIterator.next() * weightIterator.next();
+        while(inputIterator.hasNext() && weightIterator.hasNext())
+            result += inputIterator.next() * weightIterator.next();
         this.value = Util.relu(result);
     }
-    public void populate(int pop){
+    public void populate(int _pop){
         this.weights.clear();
         // TEST: Test with gaussian generation instead
         // for(int i=0; i<pop; i++) this.weights.add(Float.valueOf(new Random().nextGaussian())); // Already between -1 and 1
-        for(int i=0; i<pop; i++) this.weights.add(Float.valueOf(new Random().nextFloat() * 2 - 1)); // Originally between 0 and 1
+        for(int i=0; i<_pop; i++) this.weights.add(new Random().nextFloat() * 2 - 1); // Originally between 0 and 1
     }
 
-    public String toString(int depth){
-        String result = "\t".repeat(depth) + "Neuron(value=" + this.value + ", bias=" + this.bias + ")\n\t" + "\t".repeat(depth);
+    public String toString(int _depth){
+        String result = "\t".repeat(_depth) + "Neuron(id=" + this.id + ", value=" + this.value + ", bias=" + this.bias + ")\n\t" + "\t".repeat(_depth);
         int count = 0;
         for(Float w : this.weights) {
             result += w;
             if(++count < this.weights.size()) result += ", ";
         }
-        return result + "";
+        return result;
     }
 }
