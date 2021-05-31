@@ -1,16 +1,13 @@
 import NeuralNetworkLibrary.Layer;
+import NeuralNetworkLibrary.NeuralNetwork;
 import NeuralNetworkLibrary.Neuron;
 import NeuralNetworkLibrary.Util;
 
 public class Test {
     public static void main(String[] args) {
-        Layer l1 = new Layer(5);
-        l1.populate(2);
-        Layer l2 = new Layer(l1);
-        System.out.println(l1.toString(0));
-        System.out.println(l2.toString(0));
-        l2.populate(2);
-        System.out.println(l1.toString(0));
-        System.out.println(l2.toString(0));
+        NeuralNetwork nn = new NeuralNetwork();
+        NeuralNetwork nn2 = new NeuralNetwork(nn);
+        System.out.println(nn.toString(0));
+        System.out.println(nn2.toString(0));
     }
 }

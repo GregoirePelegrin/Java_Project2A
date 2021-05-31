@@ -8,14 +8,16 @@ public class Layer {
 
     public int id;
     public ArrayList<Neuron> neurons;
+    public int sizePrec;
     public int size;
 
-    public Layer(int _size){
+    public Layer(int _sizePrec, int _size){
         this.id = Layer.count++;
 
+        this.sizePrec = _sizePrec;
         this.size = _size;
         this.neurons = new ArrayList<>();
-        for(int i=0; i<this.size; i++) this.neurons.add(new Neuron());
+        for(int i=0; i<this.size; i++) this.neurons.add(new Neuron(this.sizePrec));
     }
     public Layer(ArrayList<ArrayList<Float>> _weights){
         this.id = Layer.count++;
@@ -28,6 +30,7 @@ public class Layer {
     public Layer(Layer _layer){
         this.id = Layer.count++;
 
+        this.sizePrec = _layer.sizePrec;
         this.size = _layer.size;
         this.neurons = new ArrayList<>();
         for(Neuron neuron : _layer.neurons)

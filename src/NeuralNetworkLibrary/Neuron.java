@@ -12,12 +12,13 @@ public class Neuron {
     public Float value;
     public ArrayList<Float> weights;
 
-    public Neuron(){
+    public Neuron(int _size){
         this.id = Neuron.count++;
 
         this.bias = new Random().nextFloat() * 2 - 1;
         this.value = (float) 0;
         this.weights = new ArrayList<>();
+        this.populate(_size);
     }
     public Neuron(ArrayList<Float> _weights){
         this.id = Neuron.count++;
@@ -53,6 +54,7 @@ public class Neuron {
 
     public String toString(int _depth){
         String result = "\t".repeat(_depth) + "Neuron(id=" + this.id + ", value=" + this.value + ", bias=" + this.bias + ")\n\t" + "\t".repeat(_depth);
+        if(this.weights.size() == 0) return result += "None";
         int count = 0;
         for(Float w : this.weights) {
             result += w;
