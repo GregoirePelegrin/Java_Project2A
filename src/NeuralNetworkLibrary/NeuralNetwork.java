@@ -2,7 +2,7 @@ package NeuralNetworkLibrary;
 
 import java.util.ArrayList;
 
-public class NeuralNetwork {
+public class NeuralNetwork implements Comparable<NeuralNetwork>{
     private static int count = 0;
 
     public int id;
@@ -47,5 +47,12 @@ public class NeuralNetwork {
             if(++count < this.layers.size()) result += "\n";
         }
         return result;
+    }
+
+    @Override
+    public int compareTo(NeuralNetwork o) {
+        if(this.fitness - o.fitness < 0) return -1;
+        if(this.fitness == o.fitness) return 0;
+        return 1;
     }
 }
