@@ -8,23 +8,23 @@ public class Neuron {
     private static int count = 0;
 
     public int id;
-    public Float bias;
-    public Float value;
+    public Double bias;
+    public Double value;
     public ArrayList<Float> weights;
 
     public Neuron(int _size){
         this.id = Neuron.count++;
 
-        this.bias = new Random().nextFloat() * 2 - 1;
-        this.value = (float) 0;
+        this.bias = new Random().nextDouble() * 2 - 1;
+        this.value = (double) 0;
         this.weights = new ArrayList<>();
         this.populate(_size);
     }
     public Neuron(ArrayList<Float> _weights){
         this.id = Neuron.count++;
 
-        this.bias = new Random().nextFloat() * 2 - 1;
-        this.value = (float) 0;
+        this.bias = new Random().nextDouble() * 2 - 1;
+        this.value = (double) 0;
         this.weights = new ArrayList<>();
         this.weights.addAll(_weights);
     }
@@ -37,9 +37,9 @@ public class Neuron {
         this.weights.addAll(_neuron.weights);
     }
 
-    public void evaluate(ArrayList<Float> _inputs){
-        Float result = this.bias;
-        Iterator<Float> inputIterator = _inputs.iterator();
+    public void evaluate(ArrayList<Double> _inputs){
+        Double result = this.bias;
+        Iterator<Double> inputIterator = _inputs.iterator();
         Iterator<Float> weightIterator = this.weights.iterator();
         while(inputIterator.hasNext() && weightIterator.hasNext())
             result += inputIterator.next() * weightIterator.next();

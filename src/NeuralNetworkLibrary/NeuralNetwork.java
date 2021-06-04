@@ -24,11 +24,11 @@ public class NeuralNetwork implements Comparable<NeuralNetwork>{
         for(Layer layer : _network.layers) this.layers.add(new Layer(layer));
     }
 
-    public void assignInput(ArrayList<Float> _inputs){
+    public void assignInput(ArrayList<Double> _inputs){
         for(Layer layer : this.layers)
             layer.assign(_inputs);
     }
-    public ArrayList<Float> evaluate(ArrayList<Float> _inputs){
+    public ArrayList<Double> evaluate(ArrayList<Double> _inputs){
         this.assignInput(_inputs);
         for(int i=0; i<this.layers.size()-1; i++) this.layers.get(i+1).evaluate(this.layers.get(i).getState());
         return this.layers.get(this.layers.size()-1).getState();

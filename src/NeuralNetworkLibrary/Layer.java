@@ -37,18 +37,18 @@ public class Layer {
             this.neurons.add(new Neuron(neuron));
     }
 
-    public void assign(ArrayList<Float> _values){
+    public void assign(ArrayList<Double> _values){
         Iterator<Neuron> neuronIterator = this.neurons.iterator();
-        Iterator<Float> valueIterator = _values.iterator();
+        Iterator<Double> valueIterator = _values.iterator();
         while(neuronIterator.hasNext() && valueIterator.hasNext())
             neuronIterator.next().value = valueIterator.next();
     }
-    public void evaluate(ArrayList<Float> _inputs){
+    public void evaluate(ArrayList<Double> _inputs){
         for(Neuron neuron : this.neurons)
             neuron.evaluate(_inputs);
     }
-    public ArrayList<Float> getState(){
-        ArrayList<Float> values = new ArrayList<>();
+    public ArrayList<Double> getState(){
+        ArrayList<Double> values = new ArrayList<>();
         for(Neuron neuron : this.neurons) values.add(neuron.value);
         return values;
     }

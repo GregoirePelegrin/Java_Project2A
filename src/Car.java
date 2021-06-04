@@ -1,7 +1,8 @@
 import NeuralNetworkLibrary.NeuralNetwork;
 
-public class Car {
+public class Car implements Comparable<Car>{
     private static int count = 0;
+    public static int VIEW_RANGE = 200;
 
     public int id;
     public boolean alive;
@@ -65,5 +66,19 @@ public class Car {
     }
     public float fitness(){
         return this.totalDistance;
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        if(this.totalDistance - o.totalDistance < 0) return -1;
+        if(this.totalDistance == o.totalDistance) return  0;
+        return 1;
+    }
+    @Override
+    public String toString(){
+        return "Car(" + ((this.alive) ? "alive" : "dead") +
+                ", x=" + this.x + ", y=" + this.y +
+                ", speed=" + this.speed + ", orientation=" + this.orientation +
+                ", fitness=" + this.totalDistance + ")";
     }
 }
